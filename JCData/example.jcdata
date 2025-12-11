@@ -1,0 +1,44 @@
+# Example JCData file.
+# This is a comment.
+
+# To use multiline comments, separate them by newlines and add a hashtag at the
+# start.
+
+# String
+string = "Hello!";
+
+# Integer
+integer = 50;
+
+# Float
+float = 2.5;
+
+# Boolean (T/F)
+boolean = F;
+
+# Date (DD/MM/YYYY) <WIP>
+date = 24/7/2003;
+
+# Time (HH:MM:SS) <WIP>
+time = 15:30:40;
+
+# Raw <WIP>
+raw = <10>,43590j;gh;
+
+# Array
+array = [
+	5;
+	6.9;
+	F;
+	"Test\
+NewLine\"hello :D";
+];
+
+# Object
+object = {
+	subtitle = "From the object";
+	count = 100;
+	subobject = {
+		test = "Subobject object entry";
+	};
+};

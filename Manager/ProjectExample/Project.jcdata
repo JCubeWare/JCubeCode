@@ -1,0 +1,40 @@
+# This is a sample project configuration. Change all values accordingly.
+# Remember, for JCubeCode to function properly, this file MUST exist in your
+# project's directory and be named "Project.jcdata"
+
+# FUTURE PLANS:
+# targets: 
+#		type = "executable";
+#		compiler = "gcc";
+#		options = [];
+#		dependencies = [];
+#		sources = ["Main.jcc";];
+#		artifact = "TestProject";
+
+name = "Test Project";
+description = "Project meant to showcase JCubeCode!";
+language = "JCubeCode";
+author = "Matunga";
+readme = "README.md";
+keywords = [
+	"Testing"; 
+	"Project Example";
+];
+license = "MIT";
+version = "0.0.1";
+targets = [
+	{
+		type = "executable";
+		compiler = "gcc";
+		options = [
+		];
+		dependencies = [
+		];
+		sources = [
+			"source/Main.jcc";
+		];
+		artifact = "TestProject";
+	};
+];
+scripts = [];
+tests = [];

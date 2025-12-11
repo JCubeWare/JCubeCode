@@ -1,0 +1,42 @@
+# <WIP>
+# This is the JCubeData schema.
+# Everything must match or the object will error out.
+# HEAVY TODO; here just for illustration purposes on how I would go about it.
+
+# String
+# Integer
+# Float
+# Boolean (T/F)
+# Date (DD/MM/YYYY)
+# Time (HH:MM:SS)
+# Raw
+# Array
+# Object
+
+# This value can only be one of these:
+oneof TargetType
+{
+	string "executable"; 
+	string "staticlib";
+	string "sharedlib";
+};
+
+# Type
+[Target]
+{
+	optional TargetType type;
+	optional string compiler "gcc";
+	optional array[string] dependencies [];
+	optional array[string] options [];
+	optional array[string] sources [];
+	optional string artifact "TestProject";
+};
+
+string name;
+string description "";
+string author;
+optional array[string] keywords [];
+optional string license "ISC";
+optional string version "0.0.1";
+array[Target] targets [];
+array[Script] scripts [];
