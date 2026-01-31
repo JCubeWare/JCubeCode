@@ -26,7 +26,7 @@
 
 ############# [J][C]ube[W]are ##############
 #   Be responsible. Code for the future.   #
-#         (c) 2025-2025, JCubeWare         #
+#         (c) 2025-2026, JCubeWare         #
 ############################################
 */
 
@@ -58,7 +58,7 @@
  *
  * Contains: (A-Z) (a-z) (0-9)
  */
-JCubeLayer Integer Character_IsAlphaNumeric
+JCubeLayer Integer Character_IsAlphanumeric
 (
 	Integer Instance
 )
