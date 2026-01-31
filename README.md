@@ -64,10 +64,10 @@ It will be located [here.](https://jcc.jcubeware.com)
 This project is licensed under the MIT license.
 Drop it in everywhere you want!
 
-[LICENSE](LICENSE)
+[LICENSE](LICENSE.md)
 
 ## 🚧 Future plans 🚧
 
 These are the future plans for JCubeCode
 
-[Planner](PLANNER)
+[Planner](PLANNER.md)
