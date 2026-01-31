@@ -32,51 +32,11 @@
 
 #pragma once
 
-#ifndef JCUBECODE_H
-#define JCUBECODE_H
-
-/*##====[ DESCRIPTION ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-/*##====[ DEFINE ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#define JCUBECODE_NAME "JCubeCode"
-#define JCUBECODE_VERSION_MAJOR 0
-#define JCUBECODE_VERSION_MINOR 0
-#define JCUBECODE_VERSION_PATCH 1
-#define JCUBECODE_STRINGER(X) #X
-#define JCUBECODE_STRINGIFY(X) JCUBECODE_STRINGER(X)
-#define JCUBECODE_VERSION_FULL JCUBECODE_NAME \
-	"_" \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MAJOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MINOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_PATCH)
+#ifndef JCUBECODE_CUBES_H
+#define JCUBECODE_CUBES_H
 
 /*##====[ INCLUDES ]====##*/
 
-#include "Core/Core.h"
-#include "Modules/Modules.h"
-
-/*##====[ LIBRARY CUBE ]====##*/
-
-extern readonly JCube JCubeCode;
-
-#ifdef __cplusplus
-}
-#endif
+#include "../Common.h"
 
 #endif

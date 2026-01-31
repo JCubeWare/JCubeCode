@@ -1,0 +1,145 @@
+/*
+           #################################
+          ###                          #####
+        ###     ######################### ##
+      ###     ###                   ##### ##
+    ####     ########################  ## ##
+  ####                          ###    ## ##
+####                          ####     ## ##
+################################ #     ## ##
+##                     #     ##  #  ## ## ##
+##                     #     ##  #  ## ## ##
+##                     #     ##  #  ##### ##
+##                     #     ##  # ###### ##
+##                     #     ##  # #  ### ##
+##                     #     ##  ###  ### ##
+##                     #     ##  ##    ## ##
+##########             #     ##  ##    #  ##
+##       #             #     ##  ##      ###
+##       #             #     ##  #      ### 
+##       #             #     ##       ###   
+##       ###############     ##     ####    
+##                           ##   ####      
+##                           ## ####        
+##                           #####          
+################################            
+
+############# [J][C]ube[W]are ##############
+#   Be responsible. Code for the future.   #
+#         (c) 2025-2026, JCubeWare         #
+############################################
+*/
+
+#pragma once
+
+#ifndef JCUBECODE_CLI_OPTIONS_H
+#define JCUBECODE_CLI_OPTIONS_H
+
+/*##====[ JCUBECODE ]====##*/
+
+#include "Common.h"
+
+/*##====[ HELP MENU ]====##*/
+
+#define JCUBECODE_HELPMENU \
+	"\n##====[ [J][C]ube[C]ode ]====##\n" \
+	"Version: %d.%d.%d (Built %s %s)\n\n" \
+	"Coding layer/library used by JCubeWare based on C90.\n" \
+	"Short name for libraries/packages is 'Cube'.\n\n" \
+	"##====[ OPTIONS ]====##\n"
+
+/*##====[ MACRO ACTIONS ]====##*/
+
+#define JCUBECODE_FUNCTION_SUBMENU(NAME, OPTIONS_LIST) \
+Outcome NAME (Arguments Data) \
+{ \
+	Outcome Status = Outcome_OK; \
+	if (Data.Count <= 0){HelpMenu(OPTIONS_LIST); return Status;} \
+	else { \
+	Arguments PassedData = Arguments_New(Data.Count-1,Data.Entry+1,false); \
+	Status = CallOption(Data.Entry[0],PassedData,OPTIONS_LIST);}\
+	return Status; \
+	}
+
+#define JCUBECODE_FUNCTION_NAME(PREFIX, NAME) PREFIX##_##NAME
+
+#define JCUBECODE_OPTION_DUMMY(PREFIX, NAME, DESCRIPTION) \
+	Outcome JCUBECODE_FUNCTION_NAME(PREFIX, NAME) (Arguments Arguments){ignore Arguments; return Outcome_OK; }
+
+#define JCUBECODE_OPTION_FUNCTION(PREFIX, NAME, DESCRIPTION) \
+	Outcome JCUBECODE_FUNCTION_NAME(PREFIX, NAME) (Arguments Arguments);
+
+#define JCUBECODE_OPTION_STRUCT(PREFIX, NAME, DESCRIPTION) \
+	{#NAME, DESCRIPTION, JCUBECODE_FUNCTION_NAME(PREFIX, NAME)},
+
+#define NONE
+#define NOMOD(NAME, X) X
+
+#define JCUBECODE_OPTION_GENSTRUCTVAR(NAME, PASSED_LIST) \
+	JCubeCode_Option NAME##Options[] = {PASSED_LIST nullobject};
+
+/*##====[ MACRO LISTS ]====##*/
+
+#define JCUBECODE_OPTIONS_ALL(FOREACH, OPTION_ACTION) \
+	FOREACH(Main, JCUBECODE_OPTION_LIST(OPTION_ACTION)) \
+	FOREACH(Cubes, JCUBECODE_CUBES_LIST(OPTION_ACTION)) \
+	FOREACH(Project, JCUBECODE_PROJECT_LIST(OPTION_ACTION)) \
+	FOREACH(Utils, JCUBECODE_UTILS_LIST(OPTION_ACTION)) \
+	FOREACH(Scripts, JCUBECODE_SCRIPTS_LIST(OPTION_ACTION)) \
+	FOREACH(Settings, JCUBECODE_SETTINGS_LIST(OPTION_ACTION))
+
+#define JCUBECODE_OPTION_LIST(OPTION_ACTION) \
+	OPTION_ACTION(_, project, "Project related commands (Building, running)") \
+	OPTION_ACTION(_, cubes, "Cube management (Dependencies)") \
+	OPTION_ACTION(_, utils, "Utilities for common tasks") \
+	OPTION_ACTION(_, script, "Scripting tools") \
+	OPTION_ACTION(_, shell, "Open the [J][C]ube[C]ode shell") \
+	OPTION_ACTION(_, settings, "Global settings for [J][C]ube[C]ode")
+
+#define JCUBECODE_CUBES_LIST(OPTION_ACTION) \
+	OPTION_ACTION(_cubes, refresh, "Scans the entire system for libs and Cubes.") \
+	OPTION_ACTION(_cubes, install, "Install a Cube globally.") \
+	OPTION_ACTION(_cubes, uninstall, "Uninstall a Cube globally.") \
+	OPTION_ACTION(_cubes, update, "Update the Cube catalogue.") \
+	OPTION_ACTION(_cubes, upgrade, "Upgrade the system or a specified Cube.")
+
+#define JCUBECODE_PROJECT_LIST(OPTION_ACTION) \
+	OPTION_ACTION(_project, init, "Initialize a project in this directory.") \
+	OPTION_ACTION(_project, uninit, "Remove JCubeCode data from this directory.") \
+	OPTION_ACTION(_project, build, "Build a specified target.") \
+	OPTION_ACTION(_project, run, "Run the built artifact of said target.") \
+	OPTION_ACTION(_project, clean, "Clean the project's temporary build files.")
+
+#define JCUBECODE_UTILS_LIST(OPTION_ACTION) \
+	OPTION_ACTION(_utils, directory, "Directory commands") \
+	OPTION_ACTION(_utils, file, "File commands") \
+	OPTION_ACTION(_utils, hash, "Hashing commands") \
+	OPTION_ACTION(_utils, jcdata, "JCData functions") \
+	OPTION_ACTION(_utils, system, "System enviroment commands") \
+	OPTION_ACTION(_utils, net, "Network related commands")
+
+#define JCUBECODE_SCRIPTS_LIST(OPTION_ACTION) \
+	OPTION_ACTION(_scripts, execute, "Run script")
+
+#define JCUBECODE_SETTINGS_LIST(OPTION_ACTION) \
+	OPTION_ACTION(_settings, list, "List all current settings")
+
+/*##====[ FUNCTIONS ]====##*/
+
+Void HelpMenu
+(
+	JCubeCode_Option pointer Listed
+);
+
+Outcome CallOption
+(
+	CString Path,
+	Arguments Arguments,
+	JCubeCode_Option pointer OptionList
+);
+
+/*##====[ OPTION FUNCTIONS ]====##*/
+
+JCUBECODE_OPTIONS_ALL(NOMOD ,JCUBECODE_OPTION_FUNCTION)
+
+#endif

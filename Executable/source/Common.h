@@ -32,51 +32,38 @@
 
 #pragma once
 
-#ifndef JCUBECODE_H
-#define JCUBECODE_H
+#ifndef JCUBECODE_CLI_COMMON_H
+#define JCUBECODE_CLI_COMMON_H
 
-/*##====[ DESCRIPTION ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
+/*##====[ JCUBECODE ]====##*/
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+#include <JCubeCode_0.0.1/JCubeCode.h>
 
-/*##====[ DEFINE ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
+/*##====[ DEFINES ]====##*/
 
-#define JCUBECODE_NAME "JCubeCode"
-#define JCUBECODE_VERSION_MAJOR 0
-#define JCUBECODE_VERSION_MINOR 0
-#define JCUBECODE_VERSION_PATCH 1
-#define JCUBECODE_STRINGER(X) #X
-#define JCUBECODE_STRINGIFY(X) JCUBECODE_STRINGER(X)
-#define JCUBECODE_VERSION_FULL JCUBECODE_NAME \
-	"_" \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MAJOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MINOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_PATCH)
+#define JCUBECODE_ENTRY_SIZE 4096
+#define JCUBECODE_COMMAND_MAX_SIZE 65535
+#define JCUBECODE_GLOBAL_PATH ".JCubeCode"
 
-/*##====[ INCLUDES ]====##*/
+/*##====[ OPTIONS ]====##*/
 
-#include "Core/Core.h"
-#include "Modules/Modules.h"
+typestruct(JCubeCode_Option,
+	CString Name;
+	CString Description;
+	Outcome FunctionPointer(DoFunction, (Arguments));
+);
 
-/*##====[ LIBRARY CUBE ]====##*/
+/*##====[ VARIABLES ]====##*/
 
-extern readonly JCube JCubeCode;
+extern JCubeCode_Option MainOptions[];
+extern Logger Print;
+extern CString CurrentDirectory;
 
-#ifdef __cplusplus
-}
-#endif
+/*##====[ FUNCTIONS ]====##*/
+
+Boolean DoUserConfirm
+(
+	CString Text
+);
 
 #endif

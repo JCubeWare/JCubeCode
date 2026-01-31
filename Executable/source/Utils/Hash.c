@@ -30,53 +30,27 @@
 ############################################
 */
 
-#pragma once
-
-#ifndef JCUBECODE_H
-#define JCUBECODE_H
-
-/*##====[ DESCRIPTION ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-/*##====[ DEFINE ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#define JCUBECODE_NAME "JCubeCode"
-#define JCUBECODE_VERSION_MAJOR 0
-#define JCUBECODE_VERSION_MINOR 0
-#define JCUBECODE_VERSION_PATCH 1
-#define JCUBECODE_STRINGER(X) #X
-#define JCUBECODE_STRINGIFY(X) JCUBECODE_STRINGER(X)
-#define JCUBECODE_VERSION_FULL JCUBECODE_NAME \
-	"_" \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MAJOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MINOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_PATCH)
-
 /*##====[ INCLUDES ]====##*/
 
-#include "Core/Core.h"
-#include "Modules/Modules.h"
+#include "Utils.h"
 
-/*##====[ LIBRARY CUBE ]====##*/
+/*##====[ HELPER FUNCTIONS ]====##*/
 
-extern readonly JCube JCubeCode;
+Outcome _utils_hash
+(
+	Arguments Arguments
+)
+{
+	Looper Iterator;
 
-#ifdef __cplusplus
+	if (Arguments.Count is 0)
+	{
+		PrintFormatted("Provide at least one CString to hash.\n");
+		return Outcome_FAIL;
+	}
+
+	for (Iterator = 0; Iterator < Arguments.Count; Iterator++)
+		PrintFormatted("%lu\n", Hash_DJB2(Arguments.Entry[Iterator]));
+
+	return Outcome_OK;
 }
-#endif
-
-#endif

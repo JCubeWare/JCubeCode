@@ -32,51 +32,30 @@
 
 #pragma once
 
-#ifndef JCUBECODE_H
-#define JCUBECODE_H
-
-/*##====[ DESCRIPTION ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-/*##====[ DEFINE ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#define JCUBECODE_NAME "JCubeCode"
-#define JCUBECODE_VERSION_MAJOR 0
-#define JCUBECODE_VERSION_MINOR 0
-#define JCUBECODE_VERSION_PATCH 1
-#define JCUBECODE_STRINGER(X) #X
-#define JCUBECODE_STRINGIFY(X) JCUBECODE_STRINGER(X)
-#define JCUBECODE_VERSION_FULL JCUBECODE_NAME \
-	"_" \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MAJOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MINOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_PATCH)
+#ifndef JCUBECODE_CLI_UTILS_H
+#define JCUBECODE_CLI_UTILS_H
 
 /*##====[ INCLUDES ]====##*/
 
-#include "Core/Core.h"
-#include "Modules/Modules.h"
+#include "../Options.h"
 
-/*##====[ LIBRARY CUBE ]====##*/
+/*##====[ MACRO LISTS ]====##*/
 
-extern readonly JCube JCubeCode;
+#define JCUBECODE_UTILS_FILE_LIST(OPTION_ACTION) \
+	OPTION_ACTION(_utils_file, info, "List file info.") \
+	OPTION_ACTION(_utils_file, dump, "Dump contents of file.") \
+	OPTION_ACTION(_utils_file, create, "Create new files.") \
+	OPTION_ACTION(_utils_file, copy, "Copy file at first path into second path.") \
+	OPTION_ACTION(_utils_file, rename, "Rename file at first path into second path.") \
+	OPTION_ACTION(_utils_file, delete, "Delete all provided file paths.")
 
-#ifdef __cplusplus
-}
-#endif
+#define JCUBECODE_UTILS_DIRECTORY_LIST(OPTION_ACTION) \
+	OPTION_ACTION(_utils_directory, list, "List all entries") \
+	OPTION_ACTION(_utils_directory, create, "Create new directory") \
+	OPTION_ACTION(_utils_directory, copy, "Copy directory from first path to second path.") \
+	OPTION_ACTION(_utils_directory, delete, "Delete the selected directory")
+
+#define JCUBECODE_UTILS_JCDATA_LIST(OPTION_ACTION) \
+	OPTION_ACTION(_utils_jcdata, load, "Load JCData from the file ")
 
 #endif

@@ -51,6 +51,14 @@ CString Storage_GetFilename
 );
 
 /*
+ * Returns the inverse of filename.
+ */
+CString Storage_GetFilepath
+(
+	CString Path
+);
+
+/*
  * Attempts to return the full path of the specified file/entry at "Path".
  * If "ResolveBuffer" is NULL, the result is allocated and returns the address.
  */

@@ -32,51 +32,45 @@
 
 #pragma once
 
-#ifndef JCUBECODE_H
-#define JCUBECODE_H
-
-/*##====[ DESCRIPTION ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-/*##====[ DEFINE ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#define JCUBECODE_NAME "JCubeCode"
-#define JCUBECODE_VERSION_MAJOR 0
-#define JCUBECODE_VERSION_MINOR 0
-#define JCUBECODE_VERSION_PATCH 1
-#define JCUBECODE_STRINGER(X) #X
-#define JCUBECODE_STRINGIFY(X) JCUBECODE_STRINGER(X)
-#define JCUBECODE_VERSION_FULL JCUBECODE_NAME \
-	"_" \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MAJOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MINOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_PATCH)
+#ifndef JCUBECODE_PROJECT_H
+#define JCUBECODE_PROJECT_H
 
 /*##====[ INCLUDES ]====##*/
 
-#include "Core/Core.h"
-#include "Modules/Modules.h"
+#include "../Common.h"
+#include "Project.h"
 
-/*##====[ LIBRARY CUBE ]====##*/
+/*##====[ DEFINES ]====##*/
 
-extern readonly JCube JCubeCode;
+#define JCUBECODE_PROJECT_FILE "./Project.jcdata"
+#define JCUBECODE_TEMP_PREFIX "_."
+#define JCUBECODE_BUILD_DIR JCUBECODE_TEMP_PREFIX "build"
+#define JCUBECODE_OBJECTS_DIR JCUBECODE_TEMP_PREFIX "objects"
 
-#ifdef __cplusplus
-}
-#endif
+#define JCUBECODE_BUILD_ALL "all"
+
+#define JCUBECODE_MAX_ARGUMENTS 500
+
+/*##====[ DATA TYPES ]====##*/
+
+typestruct(ProjectTarget,
+	CString Artifact;
+	CString Type;
+	CString Compiler;
+	Dynamic Options;
+	Dynamic Sources;
+	Dynamic Dependencies;
+	Dynamic Objects;
+);
+
+/*##====[ FUNCTIONS ]====##*/
+
+/*
+ * Returns all build/run targets in a dictionary.
+ */
+DataValue pointer Project_GetTargets
+(
+	noarguments
+);
 
 #endif

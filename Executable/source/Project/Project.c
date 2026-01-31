@@ -30,53 +30,38 @@
 ############################################
 */
 
-#pragma once
-
-#ifndef JCUBECODE_H
-#define JCUBECODE_H
-
-/*##====[ DESCRIPTION ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-/*##====[ DEFINE ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#define JCUBECODE_NAME "JCubeCode"
-#define JCUBECODE_VERSION_MAJOR 0
-#define JCUBECODE_VERSION_MINOR 0
-#define JCUBECODE_VERSION_PATCH 1
-#define JCUBECODE_STRINGER(X) #X
-#define JCUBECODE_STRINGIFY(X) JCUBECODE_STRINGER(X)
-#define JCUBECODE_VERSION_FULL JCUBECODE_NAME \
-	"_" \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MAJOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MINOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_PATCH)
-
 /*##====[ INCLUDES ]====##*/
 
-#include "Core/Core.h"
-#include "Modules/Modules.h"
+#include "Project.h"
 
-/*##====[ LIBRARY CUBE ]====##*/
+/*##====[ FUNCTIONS ]====##*/
 
-extern readonly JCube JCubeCode;
+DataValue pointer Project_GetTargets
+(
+	noarguments
+)
+{
+	Data Test;
+	DataValue pointer Targets = nullpointer;
 
-#ifdef __cplusplus
+	if (access(JCUBECODE_PROJECT_FILE, F_OK))
+	{
+		Logger_Print(Print, LogLevel_WARN, "Project settings not found.");
+		return nullpointer;
+	}
+
+	Test = Data_Load(JCUBECODE_PROJECT_FILE, true);
+	Targets = Dictionary_Get(address Test.Entries, "targets");
+	if (no Targets)
+	{
+		Logger_Print(Print, LogLevel_ERROR, "Targets entry not found.");
+		return nullpointer;
+	}
+	if (Targets->Type isnt DataType_Object)
+	{
+		Logger_Print(Print, LogLevel_ERROR, "Targets are not valid objects.");
+		return nullpointer;
+	}
+
+	return Targets;
 }
-#endif
-
-#endif

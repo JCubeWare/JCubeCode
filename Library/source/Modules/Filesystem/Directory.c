@@ -132,7 +132,6 @@ Void Directory_Free
 	if (not Instance->InitDone)
 		return;
 
-	Directory_Close(Instance);
 	String_Free(address Instance->Path);
 	Dynamic_ForEach(address Instance->Files, Callback_FreeFile);
 	Dynamic_ForEach(address Instance->Directories, Callback_FreeDirectory);
@@ -168,7 +167,7 @@ Outcome Directory_Copy
 	{
 		CurrentDirectory = Instance->Directories.Entries[Iterator].Data;
 		String_SetFormatted(address CurrentPath, "%s/%s", CopyDirectory, CurrentDirectory->Name);
-		Directory_Open(CurrentDirectory);
+		Directory_Load(CurrentDirectory);
 		Directory_Copy(CurrentDirectory, CurrentPath.Contents);
 		String_Free(address CurrentPath);
 	}

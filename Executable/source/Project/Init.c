@@ -30,53 +30,47 @@
 ############################################
 */
 
-#pragma once
-
-#ifndef JCUBECODE_H
-#define JCUBECODE_H
-
-/*##====[ DESCRIPTION ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
-/*##====[ DEFINE ]====##*/
-/*
- * The main header file to include in your project. You must include this with
- * a normal compiler or use JCubeCompile to automatically handle this for you.
- */
-
-#define JCUBECODE_NAME "JCubeCode"
-#define JCUBECODE_VERSION_MAJOR 0
-#define JCUBECODE_VERSION_MINOR 0
-#define JCUBECODE_VERSION_PATCH 1
-#define JCUBECODE_STRINGER(X) #X
-#define JCUBECODE_STRINGIFY(X) JCUBECODE_STRINGER(X)
-#define JCUBECODE_VERSION_FULL JCUBECODE_NAME \
-	"_" \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MAJOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_MINOR) \
-	"." \
-	JCUBECODE_STRINGIFY(JCUBECODE_VERSION_PATCH)
-
 /*##====[ INCLUDES ]====##*/
 
-#include "Core/Core.h"
-#include "Modules/Modules.h"
+#include "Project.h"
 
-/*##====[ LIBRARY CUBE ]====##*/
+/*##====[ FUNCTIONS ]====##*/
 
-extern readonly JCube JCubeCode;
+Outcome _project_init
+(
+	Arguments Arguments
+)
+{
+	String Test = String_New(nullpointer);
+	Directory Default = Directory_New(nullpointer);
+	FileStream pointer Settings = nullpointer;
 
-#ifdef __cplusplus
+	ignore Arguments;
+
+	Settings = FileStream_Open("./Project.jcdata", "r");
+	if (Settings)
+	{
+		Logger_Print(Print, LogLevel_ERROR, "Project is already initialized.");
+		FileStream_Close(Settings);
+		return Outcome_OK;
+	}
+
+	if (no DoUserConfirm("Are you sure you want to initialize here?"))
+		return Outcome_OK;
+
+	String_SetFormatted(
+		address Test,
+		"%s/%s/%s",
+		Enviroment_GetCString("HOME"),
+		JCUBECODE_GLOBAL_PATH,
+		"/Example"
+	);
+	Default = Directory_New(Test.Contents);
+	if (not Default.InitDone)
+		return Outcome_FAIL;
+	Directory_Load(address Default);
+	Directory_Copy(address Default, ".");
+	Logger_Print(Print, LogLevel_NORMAL, "Setting up a project template in '%s'", CurrentDirectory);
+	Directory_Free(address Default);
+	return Outcome_OK;
 }
-#endif
-
-#endif
