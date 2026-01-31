@@ -62,5 +62,6 @@
 #include "Parsing/Parsing.h"
 #include "Strings/Strings.h"
 #include "Terminal/Terminal.h"
+#include "Socket/Socket.h"
 
 #endif

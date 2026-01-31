@@ -168,12 +168,20 @@
 	#include <wctype.h>
 	#include <wordexp.h>
 #elif defined(API_WINDOWS)
+	/*#include <winsock.h>*/
 	#include <winsock2.h>
-	#include <windows.h>
+	#include <ws2tcpip.h>
 	#include <direct.h>
 	#include <uxtheme.h>
-	#include <tmschema.h>
+
+	#if WINDOWS_OLD
+		#include <tmschema.h> 
+	#else
+		#include <vssym32.h>
+	#endif
+
 	#include <commctrl.h>
+	#include <windows.h>
 #endif
 
 #endif
