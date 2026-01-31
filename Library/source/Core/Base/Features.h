@@ -66,6 +66,11 @@
 #define nullobject {0}
 
 /*
+ * This function returns nothing
+ */
+#define nullreturn void
+
+/*
  * Returns the memory address of the variable which you want the address of.
  * Perfect for use with pointers.
  */
