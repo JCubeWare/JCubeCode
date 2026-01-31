@@ -1,0 +1,16 @@
+Integer test = 5;
+String another = "porpoise";
+Boolean isOK = true;
+Array list = ["dog"; 69; 7.0; 24/07/2003; 15:30;];
+Object object = {
+	"new" = 7;
+}
+
+Print(test, another);
+
+iterator = 0;
+
+foreach (iterator, list)
+{
+	
+}

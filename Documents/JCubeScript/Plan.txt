@@ -1,0 +1,37 @@
+##====[ JCUBESCRIPT ]====##
+[] Inbuilt scripting language for JCubeCode
+[] Can be called by an interpreter or directly from JCC.
+
+##====[ TECHNICAL ]===##
+[] Closely following C syntax
+[] .jcs extension
+[] First compiled into byte code, which is then executed
+
+
+
+##====[ EXAMPLE ]====##
+
+Integer test = 5;
+String another = "porpoise";
+Boolean isOK = true;
+Array list = ["dog"; 69; 7.0; 24/07/2003; 15:30;];
+Object object = {
+	new = 7;
+}
+
+Print(test, another);
+
+iterator = 0;
+
+foreach (iterator, list)
+{
+	
+}
+
+##====[ BYTE CODE ]====##
+(This is purely illustrational)
+
+01 t e s t 00 5 00
+02 a n o t h e r 00 02 p o r p o i s e 03 00
+03 i s O K 00 01 00
+04 l i s t 02

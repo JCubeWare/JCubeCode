@@ -1,0 +1,57 @@
+# This is a sample project configuration. Change all values accordingly.
+# Remember, for JCubeCode to function properly, this file MUST exist in your
+# project's directory and be named "Project.jcdata"
+
+# Project basic information
+# These are displayed in the Cube, but also passed to the program as macros.
+info = {
+	name = "Test Project";
+	version = "0.0.1";
+	description = "Project meant to showcase JCubeCode!";
+	language = "JCubeCode";
+	url = "";
+	author = "JCW";
+	readme = "README.md";
+	keywords = [
+		"Testing"; 
+		"Project Example";
+	];
+	license = "MIT";
+	repository = "";
+	bugtracking = "";
+	links = [];
+	architecture = [];
+	os = [];
+}
+
+# These are all the targets that can be built
+# The word "all" is reserved so don't use it for a target.
+targets = {
+	app = {
+		type = "executable";
+		compiler = "gcc";
+		options = [
+		];
+		dependencies = [
+		];
+		sources = [
+			"source/Main.c";
+		];
+		artifact = "TestProject";
+	};
+};
+
+# These are the script the user or developer can run.
+scripts = [];
+
+# Tests that tell us if the project is behaving correctly.
+# As of now, the tests are rather primitive, so for a test to be counted as OK,
+# allow it to return 0 as it's outcome / return value.
+tests = [];
+
+# All the targets, artifacts and other such files that will be packed into a
+# Cube should you try to use this.
+pack = {
+	targets = [];
+	unsorted = [];
+};

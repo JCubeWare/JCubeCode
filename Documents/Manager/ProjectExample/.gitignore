@@ -1,0 +1,7 @@
+# JCubeCode prepends the build and artifacts with two underscores.
+# This should guarantee no collisions, although formats are wild these days.
+
+# See https://help.github.com/articles/ignoring-files/ for more info on how to
+# write a .gitignore file. This should be a good starting point so far.
+
+_.*

@@ -1,0 +1,32 @@
+info = {
+	name = "Test Project";
+	version = "0.0.1";
+	description = "Project meant to showcase JCubeCode!";
+	language = "JCubeCode";
+	url = "";
+	author = "JCW";
+	readme = "README.md";
+	keywords = [
+		"Testing"; 
+		"Project Example";
+	];
+	license = "MIT";
+	repository = "";
+	bugtracking = "";
+	links = [];
+	architecture = [];
+	os = [];
+};
+dependencies = [];
+contains = {
+	executables = [
+		{
+			source = "./TestProject";
+			destination = "/usr/bin";
+		};
+	];
+	documentation = [];
+	headers = [];
+	libraries = [];
+	unsorted = [];
+};
